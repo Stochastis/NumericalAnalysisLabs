@@ -1,8 +1,9 @@
 import math
 
+
 def f(x):
     # Change this return command to your desired function
-    return (x**5 - 3*x + 5)
+    return (x**2 - 2)
 
 
 def bisection(a, b, e, n):
@@ -33,21 +34,6 @@ def bisection(a, b, e, n):
     print("Failure - Max Iterations Reached")
     return
 
-
-# print("Test 1.a.")
-# print("Estimated p = " + str(bisection(1, 2, 0.001, 100)))
-
-# print("Test 1.b.")
-# print("Estimated p = " + str(bisection(-1, 4, 0.001, 100)))
-
-# print("Test 1.c.")
-# print("Estimated p = " + str(bisection(-0.5, 1, 0.001, 8)))
-
-# print("Test 2.a.")
-# print("Estimated p = " + str(bisection(2.7, 3.5, 0.001, 100)))
-
-# print("Test 2.b.")
-# print("Estimated p = " + str(bisection(-4, -1, 0.001, 20)))
 
 while (True):
     a = float(input("Enter a value for a. "))
