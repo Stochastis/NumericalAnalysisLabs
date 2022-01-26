@@ -1,16 +1,19 @@
 import math
 
+
 def f(x):
     # Change this return command to your desired function
     return ((x**2) - 1)
 
+
 def g(x):
     return (math.exp(1)**(1 - (x**2)))
+
 
 def bisection(a, b, e, n):
     i = 1
     fa = f(a)
-    
+
     while (i <= n):
         p = a + ((b-a)/2)
         fp = f(p)
@@ -30,6 +33,7 @@ def bisection(a, b, e, n):
 
     print("Failure - Max Iterations Reached")
     return
+
 
 while (True):
     a = float(input("Enter a value for a. "))
