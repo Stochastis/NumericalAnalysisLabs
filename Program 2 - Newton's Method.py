@@ -19,7 +19,9 @@ def Newtons(p0, e, n0):
         i += 1
         p0 = p
     print("Failure - Max Iterations Reached")
-    return
+    print("Approximation of p: " + str(p))
+    print("Approximation of pn-1 " + str(p0))
+    print("f(pn) = " + str(f(p0)))
 
 
 p0 = float(input("Please enter your initial guess."))
