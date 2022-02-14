@@ -14,14 +14,25 @@ def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
     return matrix
 
 
+def bestFirstRow(matrix, indices):
+    pass
+
+
 def printMatrix(matrix, indices):
     for index in indices:
         print(matrix[index])
     print('')
 
 
+def GPP(matrix, indices, n):
+    # Elimination Process
+    for i in range(n - 1):
+
+        pass
+    pass
+
+
+# Manually enter your data here
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 indices = [0, 1, 2]
-printMatrix(matrix, indices)
-multiplyAndAdd(matrix, indices, 1, 2, 4)
-printMatrix(matrix, indices)
+n = 3
