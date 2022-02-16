@@ -14,8 +14,12 @@ def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
     return matrix
 
 
-def bestFirstRow(matrix, indices):
-    pass
+def bestFirstRow(matrix, indices, i, n):
+    p = 0
+    for row in range(n):
+        if abs(matrix[indices[row]][i]) > p:
+            p = row
+    return p
 
 
 def printMatrix(matrix, indices):
@@ -27,12 +31,19 @@ def printMatrix(matrix, indices):
 def GPP(matrix, indices, n):
     # Elimination Process
     for i in range(n - 1):
-
-        pass
+        p = bestFirstRow(matrix, indices, i, n)
+        if matrix[indices[p]][i] == 0:
+            print("No unique solution exists.")
+            return
+        if p != i:
+            indices = switchRows(indices, p, i)
+        printMatrix(matrix, indices)
     pass
 
 
 # Manually enter your data here
-matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+matrix = [[1, 6, 3], [4, 5, 6], [7, 0, 9]]
 indices = [0, 1, 2]
 n = 3
+printMatrix(matrix, indices)
+GPP(matrix, indices, n)
