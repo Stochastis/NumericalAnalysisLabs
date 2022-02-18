@@ -17,9 +17,9 @@ def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
 
 
 def bestFirstRow(matrix, indices, i, n):
-    p = 0
-    for row in range(n):
-        if abs(matrix[indices[row]][i]) > p:
+    p = i
+    for row in range(i, n):
+        if abs(matrix[indices[row]][i]) > matrix[indices[p]][i]:
             p = row
     return p
 
