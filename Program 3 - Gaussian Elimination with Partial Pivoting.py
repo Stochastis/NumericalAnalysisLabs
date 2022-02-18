@@ -1,8 +1,7 @@
 def switchRows(indices, index1, index2):
-    temp = index1
+    temp = indices[index1]
     indices[index1] = index2
     indices[index2] = temp
-    print("Switched rows " + str(index1) + " and " + str(index2) + ".")
     return indices
 
 
