@@ -34,9 +34,12 @@ def GPP(matrix, indices, n):
         if matrix[indices[p]][i] == 0:
             print("No unique solution exists.")
             return
+        # Pivot rows
         if p != i:
             indices = switchRows(indices, p, i)
         printMatrix(matrix, indices)
+        for j in range(i+1, n+1):
+            m = matrix[indices[j]][i] / matrix[indices[i]][i]
     pass
 
 
