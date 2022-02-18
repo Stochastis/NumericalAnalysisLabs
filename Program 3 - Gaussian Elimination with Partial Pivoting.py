@@ -38,8 +38,13 @@ def GPP(matrix, indices, n):
         if p != i:
             indices = switchRows(indices, p, i)
         printMatrix(matrix, indices)
-        for j in range(i+1, n+1):
+        for j in range(i+1, n):
             m = matrix[indices[j]][i] / matrix[indices[i]][i]
+            for index in range(len(matrix[indices[j]])):
+                matrix[indices[j]][index] -= m * matrix[indices[i]][index]
+    if matrix[indices[n-1]][n-1] == 0:
+        print("No unique solution exists.")
+        return
     pass
 
 
