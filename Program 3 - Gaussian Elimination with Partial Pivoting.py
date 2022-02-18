@@ -11,7 +11,7 @@ def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
     scaledRow = [i * scalar for i in matrix[indices[rowBeingAdded]]]
     for i in range(len(matrix[indices[rowToAddTo]])):
         matrix[indices[rowToAddTo]][i] -= scaledRow[i]
-    print("Subtracted %f * row %i from row %i." %
+    print("Subtracted (%f * row %i) from row %i." %
           (scalar, rowBeingAdded, rowToAddTo))
     printMatrix(matrix, indices)
     return matrix
@@ -61,11 +61,11 @@ def GPP(matrix, indices, n):
 
 # Manually enter your data here
 # Augmented matrix
-matrix = [[1, 1, 1, 3], [1, 2, 3, 0], [1, 3, 2, 3]]
+matrix = [[1, 2, 3, 4, 5], [0, 1, 2, 3, 4], [0, 0, 1, 2, 3], [0, 0, 0, 1, 2]]
 
 n = len(matrix)
 indices = [0]*n
 for i in range(n):
     indices[i] = i
 printMatrix(matrix, indices)
-print(GPP(matrix, indices, n))
+print('Solution: ' + str(GPP(matrix, indices, n)))
