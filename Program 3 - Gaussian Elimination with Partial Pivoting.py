@@ -2,14 +2,17 @@ def switchRows(indices, index1, index2):
     temp = indices[index1]
     indices[index1] = index2
     indices[index2] = temp
+    print("Switched rows %i and %i." % (index1, index2))
+    printMatrix(matrix, indices)
     return indices
 
 
 def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
     scaledRow = [i * scalar for i in matrix[indices[rowBeingAdded]]]
     for i in range(len(matrix[indices[rowToAddTo]])):
-        matrix[indices[rowToAddTo]][i] += scaledRow[i]
-    print("Added %i * row %i to row %i." % (scalar, rowBeingAdded, rowToAddTo))
+        matrix[indices[rowToAddTo]][i] -= scaledRow[i]
+    print("Added %f * row %i to row %i." % (scalar, rowBeingAdded, rowToAddTo))
+    printMatrix(matrix, indices)
     return matrix
 
 
@@ -37,11 +40,9 @@ def GPP(matrix, indices, n):
         # Pivot rows
         if p != i:
             indices = switchRows(indices, p, i)
-        printMatrix(matrix, indices)
         for j in range(i+1, n):
             m = matrix[indices[j]][i] / matrix[indices[i]][i]
-            for index in range(len(matrix[indices[j]])):
-                matrix[indices[j]][index] -= m * matrix[indices[i]][index]
+            multiplyAndAdd(matrix, indices, j, i, m)
     if matrix[indices[n-1]][n-1] == 0:
         print("No unique solution exists.")
         return
