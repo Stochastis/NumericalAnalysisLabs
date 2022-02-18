@@ -11,7 +11,8 @@ def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
     scaledRow = [i * scalar for i in matrix[indices[rowBeingAdded]]]
     for i in range(len(matrix[indices[rowToAddTo]])):
         matrix[indices[rowToAddTo]][i] -= scaledRow[i]
-    print("Added %f * row %i to row %i." % (scalar, rowBeingAdded, rowToAddTo))
+    print("Subtracted %f * row %i from row %i." %
+          (scalar, rowBeingAdded, rowToAddTo))
     printMatrix(matrix, indices)
     return matrix
 
@@ -31,7 +32,7 @@ def printMatrix(matrix, indices):
 
 
 def GPP(matrix, indices, n):
-    solutions = [0]*(n-1)
+    solutions = [0]*(n)
     # Elimination Process
     for i in range(n - 1):
         p = bestFirstRow(matrix, indices, i, n)
@@ -44,16 +45,17 @@ def GPP(matrix, indices, n):
         for j in range(i+1, n):
             m = matrix[indices[j]][i] / matrix[indices[i]][i]
             multiplyAndAdd(matrix, indices, j, i, m)
-    if matrix[indices[n-1]][n-1] == 0:
+    if matrix[indices[-1]][-2] == 0:
         print("No unique solution exists.")
         return
     # Xn = right side of equation divided by coefficient
     solutions[-1] = matrix[indices[-1]][-1] / matrix[indices[-1]][-2]
     for i in range(n-1, 0, -1):
         sum = 0
-        for j in range(i+1, n):
-            sum += matrix[indices[i]][j] * solutions[j]
-        solutions[i] = (matrix[indices[-1]][i] - sum) / matrix[indices[i]][i]
+        for j in range(i, n):
+            sum += matrix[indices[i-1]][j] * solutions[j]
+        solutions[i-1] = (matrix[indices[i-1]][-1] - sum) / \
+            matrix[indices[i-1]][i-1]
     return solutions
 
 
