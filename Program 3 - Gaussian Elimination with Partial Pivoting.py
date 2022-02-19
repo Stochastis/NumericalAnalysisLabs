@@ -7,12 +7,12 @@ def switchRows(indices, index1, index2):
     return indices
 
 
-def multiplyAndAdd(matrix, indices, rowToAddTo, rowBeingAdded, scalar):
-    scaledRow = [i * scalar for i in matrix[indices[rowBeingAdded]]]
-    for i in range(len(matrix[indices[rowToAddTo]])):
-        matrix[indices[rowToAddTo]][i] -= scaledRow[i]
+def multiplyAndSubtract(matrix, indices, subtractFrom, subtracted, scalar):
+    scaledRow = [i * scalar for i in matrix[indices[subtracted]]]
+    for i in range(len(matrix[indices[subtractFrom]])):
+        matrix[indices[subtractFrom]][i] -= scaledRow[i]
     print("Subtracted (%f * row %i) from row %i." %
-          (scalar, rowBeingAdded, rowToAddTo))
+          (scalar, subtracted, subtractFrom))
     printMatrix(matrix, indices)
     return matrix
 
@@ -37,6 +37,10 @@ def GPP(matrix):
     for i in range(n):
         indices[i] = i
     printMatrix(matrix, indices)
+    # Make all entries a float for display purposes
+    for row in range(n):
+        for column in range(n):
+            matrix[indices[row]][column] *= 1.0
     solutions = [0]*(n)
     # Elimination Process
     for i in range(n - 1):
@@ -49,7 +53,7 @@ def GPP(matrix):
             indices = switchRows(indices, p, i)
         for j in range(i+1, n):
             m = matrix[indices[j]][i] / matrix[indices[i]][i]
-            multiplyAndAdd(matrix, indices, j, i, m)
+            multiplyAndSubtract(matrix, indices, j, i, m)
     if matrix[indices[-1]][-2] == 0:
         print("No unique solution exists.")
         return
