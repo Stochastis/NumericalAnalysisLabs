@@ -39,7 +39,7 @@ def GPP(matrix):
     printMatrix(matrix, indices)
     # Make all entries a float for display purposes
     for row in range(n):
-        for column in range(n):
+        for column in range(n+1):
             matrix[indices[row]][column] *= 1.0
     solutions = [0]*(n)
     # Elimination Process
@@ -96,5 +96,5 @@ print('Solution: %s\n' % (str(GPP(matrix))))
 # Manual Test:
 print('Manual Test:\n------------')
 # Enter your augmented matrix below
-matrix = [[1, 0, 0, 1], [0, 1, 0, 2], [0, 1, 0, 3]]
+matrix = [[1, 1, 1, 3], [1, 2, 3, 0], [1, 3, 2, 3]]
 print('Solution: %s' % (str(GPP(matrix))))
