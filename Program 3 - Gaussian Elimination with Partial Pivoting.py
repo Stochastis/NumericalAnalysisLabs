@@ -68,33 +68,8 @@ def GPP(matrix):
     return solutions
 
 
-# Test 1.a:
-print('Test 1.a:\n---------')
-matrix = [[0, 1, 1, 1], [0, 1, 2, 2], [0, 2, 2, 3]]
-print('Solution: %s\n' % (str(GPP(matrix))))
-
-# Test 1.b:
-print('Test 1.b:\n---------')
-matrix = [[1, 0, 0, 1], [0, 1, 0, 2], [0, 1, 0, 3]]
-print('Solution: %s\n' % (str(GPP(matrix))))
-
-# Test 1.c:
-print('Test 1.c:\n---------')
-matrix = [[1, 1, 1, 1, 1], [0, 1, 1, 1, 2], [1, 1, 1, 1, 3], [0, 1, 1, 1, 4]]
-print('Solution: %s\n' % (str(GPP(matrix))))
-
-# Test 2.a:
-print('Test 2.a:\n---------')
-matrix = [[1, 2, 3], [4, 12, 20]]
-print('Solution: %s\n' % (str(GPP(matrix))))
-
-# Test 2.b:
-print('Test 2.b:\n---------')
-matrix = [[1, 2, 3, 4, 5], [0, 1, 2, 3, 4], [0, 0, 1, 2, 3], [0, 0, 0, 1, 2]]
-print('Solution: %s\n' % (str(GPP(matrix))))
-
 # Manual Test:
 print('Manual Test:\n------------')
 # Enter your augmented matrix below
-matrix = [[1, 1, 1, 3], [1, 2, 3, 0], [1, 3, 2, 3]]
+matrix = [[]]
 print('Solution: %s' % (str(GPP(matrix))))
