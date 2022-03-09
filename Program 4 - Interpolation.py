@@ -1,7 +1,7 @@
 import math
 
 
-def NewtonDDF(xPoints, yPoints):
+def NewtonDDFCoefficients(xPoints, yPoints):
     n = len(xPoints)-1
     f = [[0]*(n+1)for i in range(n+1)]
 
@@ -31,7 +31,7 @@ def printF(F):
         print(row)
 
 
-def estimate(xPoint, coefficients, xPoints):
+def newtonDDFEstimate(xPoint, coefficients, xPoints):
     factor = 1
     result = 0
     for i in range(len(coefficients)):
@@ -40,8 +40,18 @@ def estimate(xPoint, coefficients, xPoints):
     return "P(%f) = %f" % (xPoint, result)
 
 
+# Test 1.a
+print("Test 1.a: \n")
+xPoints = [0, 1, 2, 3]
+yPoints = [1, math.e, math.e**2, math.e**3]
+coefficients = NewtonDDFCoefficients(xPoints, yPoints)
+print("Coefficients: " + str(coefficients) + "\n")
+print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
+
+# Test 1.b
+print("Test 1.b: \n")
 xPoints = [1.0, 1.3, 1.6, 1.9, 2.2]
 yPoints = [0.7651977, 0.6200860, 0.4554022, 0.2818186, 0.1103623]
-coefficients = NewtonDDF(xPoints, yPoints)
-print(str(coefficients) + "\n")
-print(estimate(1.5, coefficients, xPoints))
+coefficients = NewtonDDFCoefficients(xPoints, yPoints)
+print("Coefficients: " + str(coefficients) + "\n")
+print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
