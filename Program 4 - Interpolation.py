@@ -82,24 +82,46 @@ def NCS(x, a):
     return [a, b, c, d]
 
 
-# Test 1.a (NewtonDDF)
-# print("Test 1.a: \n")
-# xPoints = [0, 1, 2, 3]
-# yPoints = [1, math.e, math.e**2, math.e**3]
-# coefficients = NewtonDDFCoefficients(xPoints, yPoints)
-# print("Coefficients: " + str(coefficients) + "\n")
-# print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
+def estimateNCS(coefficients, point, xPoints):
 
-# # Test 1.b (NewtonDDF)
-# print("Test 1.b: \n")
-# xPoints = [1.0, 1.3, 1.6, 1.9, 2.2]
-# yPoints = [0.7651977, 0.6200860, 0.4554022, 0.2818186, 0.1103623]
-# coefficients = NewtonDDFCoefficients(xPoints, yPoints)
-# print("Coefficients: " + str(coefficients) + "\n")
-# print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
+    # Determine which piece of the function to use
+    funcNumber = 0
+    for i in range(len(xPoints)):
+        if (xPoints[i] <= point) and (point <= xPoints[i+1]):
+            funcNumber = i
+            break
+
+    result = 0
+    for i in range(len(coefficients)):
+        result += coefficients[i][funcNumber] * \
+            (point - xPoints[funcNumber]) ** i
+
+    return result
+
+
+# Test 1.a (NewtonDDF)
+print("Test 1.a: \n")
+xPoints = [0, 1, 2, 3]
+yPoints = [1, math.e, math.e**2, math.e**3]
+coefficients = NewtonDDFCoefficients(xPoints, yPoints)
+print("Coefficients: " + str(coefficients) + "\n")
+print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
+
+# Test 1.b (NewtonDDF)
+print("Test 1.b: \n")
+xPoints = [1.0, 1.3, 1.6, 1.9, 2.2]
+yPoints = [0.7651977, 0.6200860, 0.4554022, 0.2818186, 0.1103623]
+coefficients = NewtonDDFCoefficients(xPoints, yPoints)
+print("Coefficients: " + str(coefficients) + "\n")
+print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
 
 # Test 2.a (Natural Cubic Spline)
 print("Test 2.a: \n")
 xPoints = [0, 1, 2, 3]
 yPoints = [1, math.e, math.e**2, math.e**3]
-print(NCS(xPoints, yPoints))
+print("Estimation of S(0.5) = %f" %
+      estimateNCS(NCS(xPoints, yPoints), 0.5, xPoints))
+print("Estimation of S(1.5) = %f" %
+      estimateNCS(NCS(xPoints, yPoints), 1.5, xPoints))
+print("Estimation of S(2.5) = %f" %
+      estimateNCS(NCS(xPoints, yPoints), 2.5, xPoints))
