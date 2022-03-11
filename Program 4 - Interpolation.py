@@ -93,4 +93,8 @@ def NCS(x, a):
 # print("Coefficients: " + str(coefficients) + "\n")
 # print(newtonDDFEstimate(1.5, coefficients, xPoints) + "\n----------------------\n")
 
-# # Test 2.a (Natural Cubic Spline)
+# Test 2.a (Natural Cubic Spline)
+print("Test 2.a: \n")
+xPoints = [0, 1, 2, 3]
+yPoints = [1, math.e, math.e**2, math.e**3]
+print(NCS(xPoints, yPoints))
