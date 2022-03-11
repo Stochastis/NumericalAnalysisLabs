@@ -45,20 +45,23 @@ def NCS(x, a):
 
     # Initialize h
     h = [0]*n
-    for i in range(n - 1):
+    for i in range(n):
         h[i] = x[i+1] - x[i]
 
     # Compute b-vector
-    alpha = [0]*(n-1)
-    for i in range(1, n - 1):
-        alpha[i] = (3 / h[i])(a[i+1] - a[i]) - (3 / h[i-1])(a[i] - a[i-1])
+    alpha = [0]*(n)
+    for i in range(1, n):
+        alpha[i] = (3 / h[i]) * (a[i+1] - a[i]) - \
+            (3 / h[i-1]) * (a[i] - a[i-1])
 
     # Begin solving - solving c_0 using LU-decomposition
-    l, mu, z = [0]*(n-1)
+    l = [0]*(n+1)
+    z = [0]*(n+1)
+    mu = [0]*(n+1)
     l[0] = 1
 
     # solving c_i
-    for i in range(1, n-1):
+    for i in range(1, n):
         l[i] = 2*(x[i+1] - x[i-1]) - (h[i-1] * mu[i-1])
         mu[i] = h[i] / l[i]
         z[i] = (alpha[i] - (h[i-1] * z[i-1])) / l[i]
@@ -66,12 +69,14 @@ def NCS(x, a):
     # solving c_n
     l[n] = 1
     z[n] = 0
-    b, c, d = [0]*n
+    b = [0]*(n+1)
+    c = [0]*(n+1)
+    d = [0]*(n+1)
 
     # Back-Substitution and the remaining substitutions
     for j in range(n-1, 0, -1):
         c[j] = z[j] - mu[j] * c[j+1]
-        b[j] = ((a[j+1] - a[j]) / h[j]) - ((h[j] * (c[j+1] + 2 * c[j])) / 3)
+        b[j] = ((a[j+1] - a[j]) / h[j]) - ((h[j] * (c[j+1] + (2 * c[j]))) / 3)
         d[j] = (c[j+1] - c[j]) / (3 * h[j])
 
     return [a, b, c, d]
