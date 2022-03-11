@@ -74,7 +74,7 @@ def NCS(x, a):
     d = [0]*(n+1)
 
     # Back-Substitution and the remaining substitutions
-    for j in range(n-1, 0, -1):
+    for j in range(n-1, -1, -1):
         c[j] = z[j] - mu[j] * c[j+1]
         b[j] = ((a[j+1] - a[j]) / h[j]) - ((h[j] * (c[j+1] + (2 * c[j]))) / 3)
         d[j] = (c[j+1] - c[j]) / (3 * h[j])
