@@ -14,6 +14,38 @@ def compSimp(a, b, n, f):
             xi4 += f(x)
     return (h/3) * (xi1 + 2*xi2 + 4*xi4)
 
+# Recursive Adaptive Simpson's Rule Starter
+
+
+def adaptiveStart(a, b, f, Tol, N):
+    return adaptive(a, b, f, 10*Tol, N, 1)
+
+# Recursive Adaptive Simpson's Rule
+
+
+def adaptive(a, b, f, Tol, N, L):
+    if L > N:
+        return "Max Depth Exceeded"
+    else:
+        h = (b - a) / 2
+        fa = f(a)
+        fc = f(a + h)
+        fb = f(b)
+        s = (h / 3) * (fa + 4*fc + fb)
+        fd = f(a + h/2)
+        fe = f(a + ((3*h) / 2))
+        s1 = (h / 6) * (fa + 4*fd + fc)
+        s2 = (h / 6) * (fc + 4*fe + fb)
+        if abs(s1 + s2 - s) < Tol:
+            return s1 + s2
+        else:
+            left = adaptive(a, a + h, f, Tol/2, N, L + 1)
+            right = adaptive(a + h, b, f, Tol/2, N, L + 1)
+            if left == "Max Depth Exceeded" or right == "Max Depth Exceeded":
+                return "Max Depth Exceeded"
+            else:
+                return left + right
+
 
 print("Test 1.a:")
 def function(x): return x**3 - 3*x**2 - 8
@@ -33,5 +65,23 @@ print("Test 1.c:")
 def function(x): return (100 / (x**2)) * math.sin(10 / x)
 
 
-print("n = 176: %f" %
+print("n = 176: %f\n" %
       (compSimp(1, 3, 176, function)))
+
+print("Test 2.a:")
+def function(x): return x**3 - 3*x**2 - 8
+
+
+print(str(adaptiveStart(0, 4, function, 1e-7, 2)) + "\n")
+
+print("Test 2.b:")
+def function(x): return math.e**x
+
+
+print(adaptiveStart(0, 4, function, 1e-4, 2) + "\n")
+
+print("Test 2.c:")
+def function(x): return (100 / (x**2)) * math.sin(10 / x)
+
+
+print(adaptiveStart(1, 3, function, 1e-4, 100))
