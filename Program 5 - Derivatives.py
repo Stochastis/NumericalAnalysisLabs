@@ -24,7 +24,7 @@ def threePointDerivative(xPoints, yPoints):
     results[0] = (yPoints[2] - yPoints[0]) / (2*h)
     results[1] = (yPoints[-1] - yPoints[-3]) / (2*h)
 
-    return
+    return results
 
 
 def fivePointDerivative(xPoints, yPoints, pointIndex):
@@ -37,5 +37,5 @@ def fivePointDerivative(xPoints, yPoints, pointIndex):
 
 
 xPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-yPoints = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-print(fivePointDerivative(xPoints, yPoints, 4))
+yPoints = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+print(fivePointDerivative(xPoints, yPoints, 2))
