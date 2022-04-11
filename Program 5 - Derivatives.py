@@ -33,9 +33,9 @@ def fivePointDerivative(xPoints, yPoints, pointIndex):
     using the two closest points on either side."""
 
     h = xPoints[1] - xPoints[0]
-    return
+    return (yPoints[pointIndex - 2] - 8*yPoints[pointIndex - 1] + 8*yPoints[pointIndex + 1] - yPoints[pointIndex + 2]) / (12*h)
 
 
 xPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 yPoints = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-print(twoPointDerivative(xPoints, yPoints))
+print(fivePointDerivative(xPoints, yPoints, 4))
