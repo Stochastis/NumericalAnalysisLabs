@@ -13,10 +13,23 @@ def twoPointDerivative(xPoints, yPoints):
     return results
 
 
-def threePointDerivative(xPoints, yPoints):
+def threePointEndpointDerivative(xPoints, yPoints):
+    """
+    Three-point endpoint formula is used.
+    """
+
+    h = xPoints[1] - xPoints[0]
+
+    result = ((-3)*yPoints[0] + 4*yPoints[1] - yPoints[2]) / (2*h)
+
+    return result
+
+
+def threePointMidpointDerivative(xPoints, yPoints):
     """
     For the second-from-left and second-from-right points,
-    the three-point midpoint formula is used."""
+    the three-point midpoint formula is used.
+    """
 
     results = [0, 0]
     h = xPoints[1] - xPoints[0]
@@ -36,6 +49,6 @@ def fivePointDerivative(xPoints, yPoints, pointIndex):
     return (yPoints[pointIndex - 2] - 8*yPoints[pointIndex - 1] + 8*yPoints[pointIndex + 1] - yPoints[pointIndex + 2]) / (12*h)
 
 
-xPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-yPoints = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
-print(fivePointDerivative(xPoints, yPoints, 2))
+xPoints = [0, 5, 10]
+yPoints = [0, 383, 742]
+print(threePointEndpointDerivative(xPoints, yPoints))
